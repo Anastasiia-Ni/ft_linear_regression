@@ -44,20 +44,33 @@ def build_graph(data_csv):
     plt.title('Distribution of car prices relative to mileage')
     plt.rcParams.update({'font.size': 14})
 
-    # if theta0 != 0 and theta1 != 0:
-    #     x = np.linspace(0, 1, 100)
-    #     f = 0.25 - (x - 0.5)**2
-    #     plt.plot(x, f, '--r')
-    #     plt.plot(x, f, '--r', label=f'f(x) = {theta1} * x + {theta0}')
-    #     plt.legend(fontsize=12)
+    if theta0 != 0 and theta1 != 0:
+        x = range(int(min(mileage)), int(max(mileage)) + 1)
+        f = [theta1 * xi + theta0 for xi in x]
+        plt.plot(x, f, '--r')
+        plt.plot(x, f, '--r', label=f'f(x) = {theta1} * x + {theta0}')
+        plt.legend(fontsize=12)
 
 
     plt.show()
+
+
+def train_model(data_csv, learning_rate, num_iterations):
+    mileage = [data_row['km'] for (index, data_row) in data_csv.iterrows()]
+    prices = [data_row['price'] for (index, data_row) in data_csv.iterrows()]
+
+    m = len(mileage) # Количество примеров в данных
+
+    for _ in range(num_iterations):
+        return theta0, theta1
 
 #TODO 4 Реализация функции обучения (тренировки) модели
 # Разбор формулы для обновления параметров theta0 и theta1 (tmpθ0 и tmpθ1).
 # Создание функции, которая принимает данные и обучает модель с использованием градиентного спуска.
 # Использование цикла для обновления theta0 и theta1 итеративно до сходимости модели.
+
+# def train_func():
+#     pass
 
 #TODO 5 Реализация функции прогнозирования
 # Создание функции, которая принимает пробег и возвращает предполагаемую цену машины,
@@ -80,6 +93,9 @@ def main():
     data = load_data("data.csv")
     correlation_coefficient_test(data)
     build_graph(data)
+
+    train_model(data, 0.01, 42)
+
 
 
 # if __name__ == "__main__":
