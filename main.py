@@ -1,12 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import plotly.express as px
 import sys
 import os
 import signal
 from correlation_coefficient import correlation_coefficient
 from prediction import cost_forecast
 from train_model import train_model
+from precision import calculate_precision
 
 
 #TODO 1 Изучение линейной регрессии и гипотезы
@@ -52,10 +52,7 @@ def load_data(path):
 # Изучение библиотеки matplotlib.pyplot для построения графиков.
 # Нанесение точек данных на график для визуализации распределения пробега и цен на машины.
 
-def build_graph(data_csv, theta0, theta1, est_mil, est_for):
-    # mileage = normalize_data(data_csv['km'])
-    # prices = normalize_data(data_csv['price'])
-    # normaliza ??
+def build_graph(data_csv, theta0, theta1, est_mil, est_price):
 
     mileage = data_csv['km']
     prices = data_csv['price']
@@ -75,32 +72,35 @@ def build_graph(data_csv, theta0, theta1, est_mil, est_for):
     axic_y = []
 
     for point in axic_x:
-        normalized_x = (point - min_x) / (max_x - min_x)
+        normalized_x = (point - min_x) / (max_x - min_x) if (max_x - min_x) != 0 else 0
         point = theta1 * normalized_x + theta0
-        if (point != 0):
-            denormalized_y = point * (max_y - min_y) + min_y
-        else:
-            denormalized_y = 0
+        denormalized_y = point * (max_y - min_y) + min_y if point else 0
         axic_y.append(denormalized_y)
+
+    if est_price:
+        # Extend the x-axis range
+        extended_min_x = min(min_x, est_mil)
+        extended_max_x = max(max_x, est_mil)
+
+        axic_x = [extended_min_x, extended_max_x]
+        axic_y = []
+        for point in axic_x:
+            normalized_x = (point - min_x) / (max_x - min_x) if (max_x - min_x) != 0 else 0
+            point_on_line = theta1 * normalized_x + theta0
+            denormalized_y = point_on_line * (max_y - min_y) + min_y if point else 0
+            axic_y.append(denormalized_y)
+
+        plt.scatter([est_mil], [est_price], color='tab:red', marker='o', label='Car for sale', zorder=3)
+        plt.legend()
 
     if theta0 and theta1:
         formula_text = f'Regression Line: \ny = {theta1:.2f}x + {theta0:.2f}'
         plt.plot(axic_x, axic_y, 'tab:orange', label=formula_text, zorder=2)
         plt.legend()
 
-    if est_for:
-        plt.scatter([est_mil], [est_for], color='tab:red', marker='o', label='Car for sale', zorder=3)
-        plt.legend()
-
     plt.show()
 
 
-#TODO 6 Вычисление точности алгоритма (бонусная часть)
-# Разработка функции для вычисления точности модели.
-# Сравнение предсказанных значений с реальными значениями и
-# вычисление средней абсолютной ошибки или других метрик для оценки точности модели.
-# for i in range(len): srednii_kv_otklon += (theta1 * x[i] + thetha0 - y[i]) ** 2
-#  oshibka = srednii_kv_otklon/len
 def handle_ctrl_c(sig, frame):
     print("\nCtrl+C pressed. Exiting.")
     sys.exit(0)
@@ -129,7 +129,9 @@ def main():
                 if est_for:
                     build_graph(data, theta0, theta1, est_mil, est_for)
             elif command == 'g':
-                build_graph(data, theta0, theta1)
+                build_graph(data, theta0, theta1, 0, 0)
+            elif command == 'p':
+                calculate_precision(data, theta0, theta1)
             elif command == 'exit':
                 sys.exit(0)
             else:
