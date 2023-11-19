@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import sys
 import os
+import signal
 from correlation_coefficient import correlation_coefficient
 from prediction import cost_forecast
 from train_model import train_model
@@ -18,7 +19,7 @@ def correlation_coefficient_test(data_csv) -> bool:
     prices = data_csv['price']
     pirson_coefficient = correlation_coefficient(mileage, prices)
 
-    print("Pearson Correlation Coefficient: ", pirson_coefficient)
+    print(f"Pearson Correlation Coefficient: \033[1m{pirson_coefficient}\033[0m")
     return True
 
 
@@ -51,55 +52,45 @@ def load_data(path):
 # Изучение библиотеки matplotlib.pyplot для построения графиков.
 # Нанесение точек данных на график для визуализации распределения пробега и цен на машины.
 
-def build_graph(data_csv, theta0, theta1):
+def build_graph(data_csv, theta0, theta1, est_mil, est_for):
+    # mileage = normalize_data(data_csv['km'])
+    # prices = normalize_data(data_csv['price'])
+    # normaliza ??
+
     mileage = data_csv['km']
     prices = data_csv['price']
 
-    # # Создаем DataFrame из данных
-    # data = {'Mileage': mileage, 'Price': prices}
-    # df = pd.DataFrame(data)
-
-    # # Строим точечный график
-    # fig = px.scatter(df, x='Mileage', y='Price', title='Distribution of car prices relative to mileage')
-
-    # # Настройка стиля графика
-    # fig.update_traces(marker=dict(color='blue', size=8))
-
-    # # Строим линейную регрессию, если theta0 и theta1 не равны 0
-    # if theta0 != 0 and theta1 != 0:
-    #     print(f"theta0= {theta0}, theta1= {theta1}")
-    #     x_range = range(int(min(mileage)), int(max(mileage)) + 1)
-    #     y_range = theta1 * x_range + theta0
-    #     fig.add_trace(px.line(x=x_range, y=y_range, mode='lines', line=dict(color='red', dash='dash'), name=f'f(x) = {theta1} * x + {theta0}').data[0])
-
-    # # Настройка осей и шрифта
-    # fig.update_xaxes(title_text='Mileage')
-    # fig.update_yaxes(title_text='Price')
-    # fig.update_layout(font=dict(size=14))
-
-    # # Настройка размера графика
-    # fig.update_layout(height=500, width=700)
-
-    # # где то тут добавить легенду
-
-    # # Показываем график
-    # fig.show()
-
-    # то же самое в матлолибе
-    plt.plot(mileage, prices, 'ob')
-    plt.xlabel('Mileage')
-    plt.ylabel('Price')
+    plt.scatter(mileage, prices, color='xkcd:blue', marker='o', zorder=3, label="Training data")
+    plt.grid(True, which='both', linestyle='--', linewidth=0.5, color='gray', zorder=1)
+    plt.xlabel('Mileage, km')
+    plt.ylabel('Price, $')
     plt.title('Distribution of car prices relative to mileage')
-    plt.rcParams.update({'font.size': 14})
+    plt.rcParams.update({'font.size': 10})
 
-    if theta0 != 0 and theta1 != 0:
-        print(f"theta0= {theta0}, theta1= {theta1}")
-        regression_line = theta0 + theta1 * mileage
-        plt.plot(mileage, regression_line, '-r', label='Regression Line')
-        # Добавление формулы в легенду
-        formula_text = f'Regression Line: y = {theta1:.2f}x + {theta0:.2f}'
-        plt.text(mileage.min(), regression_line.min(), formula_text, fontsize=12, color='r')
+    min_x = min(mileage)
+    max_x = max(mileage)
+    min_y = min(prices)
+    max_y = max(prices)
+    axic_x = [min_x, max_x]
+    axic_y = []
 
+    for point in axic_x:
+        normalized_x = (point - min_x) / (max_x - min_x)
+        point = theta1 * normalized_x + theta0
+        if (point != 0):
+            denormalized_y = point * (max_y - min_y) + min_y
+        else:
+            denormalized_y = 0
+        axic_y.append(denormalized_y)
+
+    if theta0 and theta1:
+        formula_text = f'Regression Line: \ny = {theta1:.2f}x + {theta0:.2f}'
+        plt.plot(axic_x, axic_y, 'tab:orange', label=formula_text, zorder=2)
+        plt.legend()
+
+    if est_for:
+        plt.scatter([est_mil], [est_for], color='tab:red', marker='o', label='Car for sale', zorder=3)
+        plt.legend()
 
     plt.show()
 
@@ -110,7 +101,13 @@ def build_graph(data_csv, theta0, theta1):
 # вычисление средней абсолютной ошибки или других метрик для оценки точности модели.
 # for i in range(len): srednii_kv_otklon += (theta1 * x[i] + thetha0 - y[i]) ** 2
 #  oshibka = srednii_kv_otklon/len
+def handle_ctrl_c(sig, frame):
+    print("\nCtrl+C pressed. Exiting.")
+    sys.exit(0)
 
+def handle_ctrl_z(sig, frame):
+    print("\nCtrl+Z pressed. Exiting.")
+    sys.exit(0)
 
 def main():
     try:
@@ -120,13 +117,17 @@ def main():
         theta0, theta1 = 0, 0
 
         while True:
+            signal.signal(signal.SIGINT, handle_ctrl_c)
+            signal.signal(signal.SIGTSTP, handle_ctrl_z)
             command = input("Enter a command: ")
             if command == 't':
                 correlation_coefficient_test(data)
-                build_graph(data, theta0, theta1)
                 theta0, theta1 = train_model(data, 0.5, 300, theta0, theta1)
+                build_graph(data, theta0, theta1, 0, 0)
             elif command == 'e':
-                cost_forecast(theta0, theta1)
+                est_mil, est_for = cost_forecast(data, theta0, theta1)
+                if est_for:
+                    build_graph(data, theta0, theta1, est_mil, est_for)
             elif command == 'g':
                 build_graph(data, theta0, theta1)
             elif command == 'exit':
@@ -145,6 +146,9 @@ def main():
         print (f"TypeError: {e}")
     except ValueError as e:
         print (f"ValueError: {e}")
+    except EOFError:
+        print("\nCtrl+D pressed. Exiting.")
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
