@@ -7,6 +7,7 @@ import time
 
 
 def normalize_data(data):
+    """Normalize the given data to the range [0, 1]."""
     try:
         normalized_data = (data - data.min()) / (data.max() - data.min())
     except ZeroDivisionError as e:
@@ -15,7 +16,7 @@ def normalize_data(data):
 
 
 def train_model(data_csv, learning_rate, num_iterations, theta0, theta1):
-    
+    """Train a linear regression model using gradient descent."""
     normalized_data = data_csv.apply(normalize_data)
     mileage = normalized_data['km']
     prices = normalized_data['price']
@@ -47,6 +48,10 @@ def train_model(data_csv, learning_rate, num_iterations, theta0, theta1):
 
 
 def input_rate_iterations():
+    """
+    Prompt the user to input the learning rate and
+    the number of iterations for model training.
+    """
     learning_rate = 0.00
     num_iterations = 0
     while not learning_rate:
@@ -56,10 +61,9 @@ def input_rate_iterations():
         if rate_inp.strip():
             if (rate_inp.strip() and
                 (
-                    rate_inp.replace('.', '', 1).replace('-', '', 1).isdigit() or 
-                    (rate_inp[0] == '-' and 
-                    rate_inp[1:].replace('.', '').isdigit()))
-                ):
+                    rate_inp.replace('.', '', 1).replace('-', '', 1).isdigit() or
+                    (rate_inp[0] == '-' and
+                        rate_inp[1:].replace('.', '').isdigit()))):
                 learning_rate = float(rate_inp)
                 if 0 < learning_rate < 1:
                     print()
@@ -70,7 +74,7 @@ def input_rate_iterations():
                 print("\033[31mError:\033[0m Please enter a valid number.")
         else:
             print("\033[31mError:\033[0m Please enter a non-empty value.")
-    
+
     while not num_iterations:
         signal.signal(signal.SIGINT, handle_ctrl_c)
         signal.signal(signal.SIGTSTP, handle_ctrl_z)
@@ -80,14 +84,15 @@ def input_rate_iterations():
                 num_iterations = int(it_inp)
                 print()
             else:
-                print(f"\033[31mError:\033[0m Please enter a valid integer.")
+                print("\033[31mError:\033[0m Please enter a valid integer.")
         else:
-            print(f"\033[31mError:\033[0m Please enter a non-empty value.")
+            print("\033[31mError:\033[0m Please enter a non-empty value.")
 
     return learning_rate, num_iterations
 
 
 def main():
+    """Main function to execute the complete machine learning project workflow."""
     try:
         data = load_data("data.csv")
         if data is None:
@@ -105,16 +110,15 @@ def main():
     except ZeroDivisionError:
         print("ZeroDivisionError: Please check the data in *.csv file.")
     except TypeError as e:
-        print (f"TypeError: {e}")
+        print(f"TypeError: {e}")
     except ValueError as e:
-        print (f"ValueError: {e}")
+        print(f"ValueError: {e}")
     except KeyError as e:
-        print (f"KeyError: {e}")
+        print(f"KeyError: {e}")
     except EOFError:
         print("\nCtrl+D pressed. Exiting.")
         sys.exit(0)
 
-    
 
 if __name__ == "__main__":
     main()
