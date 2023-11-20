@@ -1,3 +1,6 @@
+import os
+import sys
+from utils import load_data
 #TODO 6 Вычисление точности алгоритма (бонусная часть)
 # Разработка функции для вычисления точности модели.
 # Сравнение предсказанных значений с реальными значениями и
@@ -41,3 +44,31 @@ def calculate_precision(data_csv, theta0, theta1):
 
     print(f"Mean Absolute Error: {mae:.2f}")
     print(f'Precision (R^2): {precision:.4f}') # Чем ближе к 1, тем лучше.
+
+
+def main():
+    try:
+        data = load_data("data.csv")
+        if not os.path.exists('theta_values.csv'):
+            print("First you need to \033[1mtrain\033[0m the model.")
+        theta_data = load_data('theta_values.csv')
+        if data is None:
+            return
+        theta0 = float(theta_data['theta0'].values[0])
+        theta1 = float(theta_data['theta1'].values[0])
+        calculate_precision(data, theta0, theta1)
+    except AssertionError as e:
+        print(f"AssertionError: {e}")
+    except ZeroDivisionError:
+        print("ZeroDivisionError: Please check the data in *.csv file.")
+    except TypeError as e:
+        print (f"TypeError: {e}")
+    except ValueError as e:
+        print (f"ValueError: {e}")
+    except EOFError:
+        print("\nCtrl+D pressed. Exiting.")
+        sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()

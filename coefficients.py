@@ -17,3 +17,10 @@ def correlation_coefficient(data1, data2):
 
     coefficient = cov / (std_dev1 * std_dev2)
     return coefficient
+
+def correlation_coefficient_test(data_csv):
+    mileage = data_csv['km']
+    prices = data_csv['price']
+    pirson_coefficient = correlation_coefficient(mileage, prices)
+
+    print(f"Pearson Correlation Coefficient: \033[1m{pirson_coefficient:.2f}\033[0m")
