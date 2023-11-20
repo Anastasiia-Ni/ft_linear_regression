@@ -10,14 +10,15 @@ import os
 def cost_forecast(data, theta0, theta1):
 
     if not theta0 and not theta1:
-        print ("First you need to \033[1mtrain\033[0m the model.")
+        print ("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.033[0m")
         return 0
     mil_forecast = -1
 
     while mil_forecast < 0:
         signal.signal(signal.SIGINT, handle_ctrl_c)
         signal.signal(signal.SIGTSTP, handle_ctrl_z)
-        milage_str = input("Write the mileage (in km) to predict the price: ") # добавить проверк, мб это все в отдельную функцию
+        print(20 * '#')
+        milage_str = input("Write the mileage (in km) to predict the price: \033[0m")
         if milage_str.strip():
             if milage_str.isdigit():
                 mil_forecast = int(milage_str) # while loop
@@ -41,10 +42,10 @@ def cost_forecast(data, theta0, theta1):
     price_forecast = normalized_price * (max_price - min_price) + min_price if normalized_price > 0 else 0
     
     if price_forecast > 0:
-        print(f"The estimated price of this car is: \033[1m{price_forecast:.2f}\033[0m.")
+        print(f"The estimated price of this car is: \033[1m{price_forecast:.2f}\033[0m")
     else:
         price_forecast = 0
-        print("The car cannot be sold.")
+        print("The car cannot be sold.\033[0m")
 
     return mil_forecast, price_forecast
 
@@ -53,7 +54,8 @@ def main():
     try:
         data = load_data("data.csv")
         if not os.path.exists('theta_values.csv'):
-            print("First you need to \033[1mtrain\033[0m the model.")
+            print("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.\033[0m")
+            return
         theta_data = load_data('theta_values.csv')
         if data is None:
             return

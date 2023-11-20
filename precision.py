@@ -25,7 +25,7 @@ def create_predicted_prices(mileage, prices, theta0, theta1):
 def calculate_precision(data_csv, theta0, theta1):
 
     if not theta0 and not theta1:
-        print ("First you need to \033[1mtrain\033[0m the model.")
+        print ("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.\033[0m")
         return 0
     mileage = data_csv['km']
     prices = data_csv['price']
@@ -50,7 +50,8 @@ def main():
     try:
         data = load_data("data.csv")
         if not os.path.exists('theta_values.csv'):
-            print("First you need to \033[1mtrain\033[0m the model.")
+            print("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.\033[0m")
+            return
         theta_data = load_data('theta_values.csv')
         if data is None:
             return

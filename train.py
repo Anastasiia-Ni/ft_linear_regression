@@ -1,9 +1,9 @@
 from coefficients import correlation_coefficient_test
 from utils import load_data, save_theta_values, handle_ctrl_c, handle_ctrl_z
 from build_graph import build_graph
-from colorama import Fore, Style, init
 import sys
 import signal
+import time
 
 
 def normalize_data(data):
@@ -40,7 +40,13 @@ def train_model(data_csv, learning_rate, num_iterations, theta0, theta1):
         grad_theta1 = learning_rate * (1 / m) * grad_theta1
         theta0 -= grad_theta0
         theta1 -= grad_theta1
-    print(f'Regression Line: \033[1my = {theta1:.2f}x + {theta0:.2f}\033[0m')
+
+    print("Model calculation...")
+    time.sleep(1)
+
+    print(f"\033[33m{40 * '-'}\033[0m")
+    print(f"\033[33mRegression Line: \033[1my = {theta1:.2f}x + {theta0:.2f}\033[0m")
+    print(f"\033[33m{40 * '-'}\033[0m\n")
     return theta0, theta1
 
 
@@ -50,32 +56,41 @@ def input_rate_iterations():
     while not learning_rate:
         signal.signal(signal.SIGINT, handle_ctrl_c)
         signal.signal(signal.SIGTSTP, handle_ctrl_z)
-        rate_inp = input("Enter learning rate for the training (between 0 and 1): ")
+        rate_inp = input("\033[32mEnter learning rate for the training (between 0 and 1): \033[0m")
         if rate_inp.strip():
-            if rate_inp.replace('.', '').isdigit() or (rate_inp[0] == '-' and rate_inp[1:].replace('.', '').isdigit()):
+            if (rate_inp.strip() and
+                (
+                    rate_inp.replace('.', '', 1).replace('-', '', 1).isdigit() or 
+                    (rate_inp[0] == '-' and 
+                    rate_inp[1:].replace('.', '').isdigit()))
+                ):
                 learning_rate = float(rate_inp)
-                if 0 <= learning_rate <= 1:
-                    print(f"Learning rate: {learning_rate}")
+                if 0 < learning_rate < 1:
+                    print(f"\033[33m{40 * '-'}\033[0m")
+                    print(f"\033[33mLearning rate: \033[1m{learning_rate}\033[0m")
+                    print(f"\033[33m{40 * '-'}\033[0m\n")
                 else:
                     learning_rate = 0
-                    print("Error: Please enter a number between 0 and 1.")
+                    print("\033[31mError:\033[0m Please enter a number between 0 and 1 (not including).")
             else:
-                print("Error: Please enter a valid number.")
+                print("\033[31mError:\033[0m Please enter a valid number.")
         else:
-            print("Error: Please enter a non-empty value.")
+            print("\033[31mError:\033[0m Please enter a non-empty value.")
     
     while not num_iterations:
         signal.signal(signal.SIGINT, handle_ctrl_c)
         signal.signal(signal.SIGTSTP, handle_ctrl_z)
-        it_inp = input("Enter iterations number rate for the training: ")
+        it_inp = input("\033[32mEnter iterations number rate for the training: \033[0m")
         if it_inp.strip():
-            if it_inp.isdigit():
+            if it_inp.isdigit() and int(it_inp) > 0:
                 num_iterations = int(it_inp)
-                print(f"{Fore.GREEN}Iterations number: {num_iterations:.0f}{Style.RESET_ALL}")
+                print(f"\033[33m{40 * '-'}\033[0m")
+                print(f"\033[33mIterations number: \033[1m{num_iterations:.0f}\033[0m")
+                print(f"\033[33m{40 * '-'}\033[0m\n")
             else:
-                print(f"\033[31mError: Please enter a valid integer.\033[0m")
+                print(f"\033[31mError:\033[0m Please enter a valid integer.")
         else:
-            print(f"\033[31mError: Please enter a non-empty value.\033[0m")
+            print(f"\033[31mError:\033[0m Please enter a non-empty value.")
 
     return learning_rate, num_iterations
 
