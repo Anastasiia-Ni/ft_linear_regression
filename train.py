@@ -13,10 +13,6 @@ def normalize_data(data):
         print(f"ZeroDivisionError: {e}")
     return normalized_data
 
-#TODO 4 Реализация функции обучения (тренировки) модели
-# Разбор формулы для обновления параметров theta0 и theta1 (tmpθ0 и tmpθ1).
-# Создание функции, которая принимает данные и обучает модель с использованием градиентного спуска.
-# Использование цикла для обновления theta0 и theta1 итеративно до сходимости модели.
 
 def train_model(data_csv, learning_rate, num_iterations, theta0, theta1):
     
@@ -44,9 +40,9 @@ def train_model(data_csv, learning_rate, num_iterations, theta0, theta1):
     print("Model calculation...")
     time.sleep(1)
 
-    print(f"\033[33m{40 * '-'}\033[0m")
+    print(f"\033[33m{43 * '-'}\033[0m")
     print(f"\033[33mRegression Line: \033[1my = {theta1:.2f}x + {theta0:.2f}\033[0m")
-    print(f"\033[33m{40 * '-'}\033[0m\n")
+    print(f"\033[33m{43 * '-'}\033[0m\n")
     return theta0, theta1
 
 
@@ -66,9 +62,7 @@ def input_rate_iterations():
                 ):
                 learning_rate = float(rate_inp)
                 if 0 < learning_rate < 1:
-                    print(f"\033[33m{40 * '-'}\033[0m")
-                    print(f"\033[33mLearning rate: \033[1m{learning_rate}\033[0m")
-                    print(f"\033[33m{40 * '-'}\033[0m\n")
+                    print()
                 else:
                     learning_rate = 0
                     print("\033[31mError:\033[0m Please enter a number between 0 and 1 (not including).")
@@ -84,9 +78,7 @@ def input_rate_iterations():
         if it_inp.strip():
             if it_inp.isdigit() and int(it_inp) > 0:
                 num_iterations = int(it_inp)
-                print(f"\033[33m{40 * '-'}\033[0m")
-                print(f"\033[33mIterations number: \033[1m{num_iterations:.0f}\033[0m")
-                print(f"\033[33m{40 * '-'}\033[0m\n")
+                print()
             else:
                 print(f"\033[31mError:\033[0m Please enter a valid integer.")
         else:

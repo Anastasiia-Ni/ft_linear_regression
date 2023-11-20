@@ -1,11 +1,6 @@
 import os
 import sys
 from utils import load_data
-#TODO 6 Вычисление точности алгоритма (бонусная часть)
-# Разработка функции для вычисления точности модели.
-# Сравнение предсказанных значений с реальными значениями и
-# вычисление средней абсолютной ошибки или других метрик для оценки точности модели.
-# from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score  - библиотеки сами считают
 
 def create_predicted_prices(mileage, prices, theta0, theta1):
     min_mil = min(mileage)
@@ -25,7 +20,7 @@ def create_predicted_prices(mileage, prices, theta0, theta1):
 def calculate_precision(data_csv, theta0, theta1):
 
     if not theta0 and not theta1:
-        print ("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.\033[0m")
+        print ("\033[36mFirst you need to \033[1mtrain\033[0m \033[36mthe model.\033[0m")
         return 0
     mileage = data_csv['km']
     prices = data_csv['price']
@@ -42,15 +37,19 @@ def calculate_precision(data_csv, theta0, theta1):
 
     mae = sum(abs(actual - predicted) for actual, predicted in zip(prices, predicted_prices)) / len(prices)
 
-    print(f"Mean Absolute Error: {mae:.2f}")
-    print(f'Precision (R^2): {precision:.4f}') # Чем ближе к 1, тем лучше.
+    print(f"\033[33m{43 * '-'}\033[0m")
+    print(f"\033[33mMean Absolute Error: \033[1m{mae:.2f}\033[0m")
+    print(f"\033[33m{43 * '-'}\033[0m\n")
 
+    print(f"\033[33m{43 * '-'}\033[0m")
+    print(f"\033[33mPrecision (R^2): \033[1m{precision:.4f}\033[0m") # Чем ближе к 1, тем лучше.
+    print(f"\033[33m{43 * '-'}\033[0m\n")
 
 def main():
     try:
         data = load_data("data.csv")
         if not os.path.exists('theta_values.csv'):
-            print("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.\033[0m")
+            print("\033[36mFirst you need to \033[1mtrain\033[0m \033[36mthe model.\033[0m")
             return
         theta_data = load_data('theta_values.csv')
         if data is None:

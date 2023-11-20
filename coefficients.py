@@ -23,6 +23,6 @@ def correlation_coefficient_test(data_csv):
     prices = data_csv['price']
     pirson_coefficient = correlation_coefficient(mileage, prices)
 
-    print(f"\033[33m{40 * '-'}\033[0m")
+    print(f"\033[33m{43 * '-'}\033[0m")
     print(f"\033[33mPearson Correlation Coefficient: \033[1m{pirson_coefficient:.2f}\033[0m")
-    print(f"\033[33m{40 * '-'}\033[0m\n")
+    print(f"\033[33m{43 * '-'}\033[0m\n")

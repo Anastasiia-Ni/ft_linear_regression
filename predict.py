@@ -3,14 +3,12 @@ from build_graph import build_graph
 import sys
 import signal
 import os
-#TODO 5 Реализация функции прогнозирования
-# Создание функции, которая принимает пробег и возвращает предполагаемую цену машины,
-# используя гипотезу (estimatePrice(mileage) = θ0 + (θ1 * mileage)) и
-# последние значения theta0 и theta1.
+
+
 def cost_forecast(data, theta0, theta1):
 
     if not theta0 and not theta1:
-        print ("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.033[0m")
+        print ("\033[36mFirst you need to \033[1mtrain\033[0m \033[36mthe model.033[0m")
         return 0
     mil_forecast = -1
 
@@ -20,13 +18,12 @@ def cost_forecast(data, theta0, theta1):
         milage_str = input("\033[32mWrite the mileage (in km) to predict the price: \033[0m")
         if milage_str.strip():
             if milage_str.isdigit():
-                mil_forecast = int(milage_str) # while loop
+                mil_forecast = int(milage_str)
             else:
                 print(f"\033[31mError:\033[0m Please enter a valid integer.")
         else:
             print(f"\033[31mError:\033[0m Please enter a non-empty value.")
     
-    # data = data.apply(normalize_data)
     mileage = data['km']
     prices = data['price']
 
@@ -55,7 +52,7 @@ def main():
     try:
         data = load_data("data.csv")
         if not os.path.exists('theta_values.csv'):
-            print("\033[35mFirst you need to \033[1mtrain\033[0m \033[35mthe model.\033[0m")
+            print("\033[36mFirst you need to \033[1mtrain\033[0m \033[36mthe model.\033[0m")
             return
         theta_data = load_data('theta_values.csv')
         if data is None:
