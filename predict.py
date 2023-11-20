@@ -17,15 +17,14 @@ def cost_forecast(data, theta0, theta1):
     while mil_forecast < 0:
         signal.signal(signal.SIGINT, handle_ctrl_c)
         signal.signal(signal.SIGTSTP, handle_ctrl_z)
-        print(20 * '#')
-        milage_str = input("Write the mileage (in km) to predict the price: \033[0m")
+        milage_str = input("\033[32mWrite the mileage (in km) to predict the price: \033[0m")
         if milage_str.strip():
             if milage_str.isdigit():
                 mil_forecast = int(milage_str) # while loop
             else:
-                print(f"\033[31mError: Please enter a valid integer.\033[0m")
+                print(f"\033[31mError:\033[0m Please enter a valid integer.")
         else:
-            print(f"\033[31mError: Please enter a non-empty value.\033[0m")
+            print(f"\033[31mError:\033[0m Please enter a non-empty value.")
     
     # data = data.apply(normalize_data)
     mileage = data['km']
@@ -41,11 +40,13 @@ def cost_forecast(data, theta0, theta1):
     
     price_forecast = normalized_price * (max_price - min_price) + min_price if normalized_price > 0 else 0
     
+    print(f"\033[33m{43 * '-'}\033[0m")
     if price_forecast > 0:
-        print(f"The estimated price of this car is: \033[1m{price_forecast:.2f}\033[0m")
+        print(f"\033[33mThe estimated price of the car is: \033[1m{price_forecast:.2f}\033[0m")
     else:
         price_forecast = 0
-        print("The car cannot be sold.\033[0m")
+        print("\033[33mThe car cannot be sold.\033[0m")
+    print(f"\033[33m{43 * '-'}\033[0m\n")
 
     return mil_forecast, price_forecast
 
@@ -74,6 +75,8 @@ def main():
         print (f"TypeError: {e}")
     except ValueError as e:
         print (f"ValueError: {e}")
+    except KeyError as e:
+        print (f"KeyError: {e}")
     except EOFError:
         print("\nCtrl+D pressed. Exiting.")
         sys.exit(0)

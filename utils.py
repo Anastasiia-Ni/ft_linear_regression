@@ -14,6 +14,9 @@ def load_data(path):
         print(f"\033[31mError reading the file:\033[0m {e}")
         return None
     
+    if data_csv.empty or data_csv.shape[0] == 0:
+        print("\033[31mNo data\033[0m in the DataFrame.")
+        return None
     if data_csv.isnull().any().any():
         print("\033[31mMissing values\033[0m detected in the data.")
         return None

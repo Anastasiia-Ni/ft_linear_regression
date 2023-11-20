@@ -66,6 +66,8 @@ def main():
         print (f"TypeError: {e}")
     except ValueError as e:
         print (f"ValueError: {e}")
+    except KeyError as e:
+        print (f"KeyError: {e}")
     except EOFError:
         print("\nCtrl+D pressed. Exiting.")
         sys.exit(0)
