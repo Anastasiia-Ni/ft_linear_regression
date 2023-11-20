@@ -1,9 +1,5 @@
 import matplotlib.pyplot as plt
 
-#TODO 3 Визуализация данных
-# Изучение библиотеки matplotlib.pyplot для построения графиков.
-# Нанесение точек данных на график для визуализации распределения пробега и цен на машины.
-
 def build_graph(data_csv, theta0, theta1, est_mil, est_price):
 
     mileage = data_csv['km']

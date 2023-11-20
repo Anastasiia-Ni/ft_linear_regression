@@ -3,30 +3,27 @@ from build_graph import build_graph
 import sys
 import signal
 import os
-#TODO 5 Реализация функции прогнозирования
-# Создание функции, которая принимает пробег и возвращает предполагаемую цену машины,
-# используя гипотезу (estimatePrice(mileage) = θ0 + (θ1 * mileage)) и
-# последние значения theta0 и theta1.
+
+
 def cost_forecast(data, theta0, theta1):
 
     if not theta0 and not theta1:
-        print ("First you need to \033[1mtrain\033[0m the model.")
+        print ("\033[36mFirst you need to \033[1mtrain\033[0m \033[36mthe model.033[0m")
         return 0
     mil_forecast = -1
 
     while mil_forecast < 0:
         signal.signal(signal.SIGINT, handle_ctrl_c)
         signal.signal(signal.SIGTSTP, handle_ctrl_z)
-        milage_str = input("Write the mileage (in km) to predict the price: ") # добавить проверк, мб это все в отдельную функцию
+        milage_str = input("\033[32mWrite the mileage (in km) to predict the price: \033[0m")
         if milage_str.strip():
             if milage_str.isdigit():
-                mil_forecast = int(milage_str) # while loop
+                mil_forecast = int(milage_str)
             else:
-                print(f"\033[31mError: Please enter a valid integer.\033[0m")
+                print(f"\033[31mError:\033[0m Please enter a valid integer.")
         else:
-            print(f"\033[31mError: Please enter a non-empty value.\033[0m")
+            print(f"\033[31mError:\033[0m Please enter a non-empty value.")
     
-    # data = data.apply(normalize_data)
     mileage = data['km']
     prices = data['price']
 
@@ -40,11 +37,13 @@ def cost_forecast(data, theta0, theta1):
     
     price_forecast = normalized_price * (max_price - min_price) + min_price if normalized_price > 0 else 0
     
+    print(f"\033[33m{43 * '-'}\033[0m")
     if price_forecast > 0:
-        print(f"The estimated price of this car is: \033[1m{price_forecast:.2f}\033[0m.")
+        print(f"\033[33mThe estimated price of the car is: \033[1m{price_forecast:.2f}\033[0m")
     else:
         price_forecast = 0
-        print("The car cannot be sold.")
+        print("\033[33mThe car cannot be sold.\033[0m")
+    print(f"\033[33m{43 * '-'}\033[0m\n")
 
     return mil_forecast, price_forecast
 
@@ -53,7 +52,8 @@ def main():
     try:
         data = load_data("data.csv")
         if not os.path.exists('theta_values.csv'):
-            print("First you need to \033[1mtrain\033[0m the model.")
+            print("\033[36mFirst you need to \033[1mtrain\033[0m \033[36mthe model.\033[0m")
+            return
         theta_data = load_data('theta_values.csv')
         if data is None:
             return
@@ -72,6 +72,8 @@ def main():
         print (f"TypeError: {e}")
     except ValueError as e:
         print (f"ValueError: {e}")
+    except KeyError as e:
+        print (f"KeyError: {e}")
     except EOFError:
         print("\nCtrl+D pressed. Exiting.")
         sys.exit(0)
