@@ -1,6 +1,14 @@
 import matplotlib.pyplot as plt
 
+
 def build_graph(data_csv, theta0, theta1, est_mil, est_price):
+    """
+    Visualizes the distribution of car prices relative to mileage
+    using a scatter plot.
+    The function plots the training data points, regression line,
+    and a marker for the car for sale, considering the provided parameters.
+    If no estimated price is given, it only displays the training data.
+    """
 
     mileage = data_csv['km']
     prices = data_csv['price']
@@ -27,7 +35,7 @@ def build_graph(data_csv, theta0, theta1, est_mil, est_price):
 
     if est_price:
         # Extend the x-axis range
-        est_mil = 1 if est_mil == 0 else est_mil 
+        est_mil = 1 if est_mil == 0 else est_mil
         extended_min_x = min(min_x, est_mil)
         extended_max_x = max(max_x, est_mil)
 
