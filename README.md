@@ -13,19 +13,30 @@ The equation of a simple linear regression model is given by:
 Where:
 - y is the dependent variable (car price in this project).
 - x is the independent variable (car mileage).
-- theta_0 is the intercept.
-- theta_1 s the slope.
+- theta_0 is the intercept (displacement coefficient).
+- theta_1 s the slope (slope factor).
+
+  РИСУНОК Visualizing an example of linear regression on a graph.
+  The goal of regression is to find the coefficients of this linear combination, thereby determining the regression function.
 
 ### Pearson Correlation Coefficient:
 The Pearson correlation coefficient, often denoted as r, measures the linear relationship between two variables. It takes values between -1 and 1, where:
-- r=1 indicates a perfect positive linear relationship.
-- r=−1 indicates a perfect negative linear relationship.
-- r=0 indicates no linear relationship.
+- r = 1 indicates a perfect positive linear relationship.
+- r = −1 indicates a perfect negative linear relationship.
+- r = 0 indicates no linear relationship.
 
 In the context of this project, the Pearson correlation coefficient is used to assess the correlation between car mileage and prices, 
 providing insights into the strength and direction of the linear relationship. 
 A coefficient close to 1 or -1 suggests a strong linear relationship, making it a valuable indicator for the quality of the linear regression model. 
 The closer r is to 1 or -1, the better the linear regression captures the underlying patterns in the data. in the direction that reduces the cost.
+
+### Method of least squares
+The method of least squares aims to find parameters in such a way that the predicted values are as close as possible to the actual values. 
+Graphically, this is expressed as follows:
+РИСУНОК
+
+In the graphical representation, this corresponds to finding the line that minimizes the sum of the squared distances between each data point and the corresponding point on the line.
+
 
 ### Gradient Descent:
 Gradient descent is an optimization algorithm used to find the minimum of a function iteratively. 
@@ -34,9 +45,10 @@ which measures the difference between the predicted values and the actual values
 The algorithm adjusts the model parameters (in this case theta0 and theta1) 
 
 СЮДА НАЙТИ НОРМАЛЬНУЮ формулу с объяснением и рисунки
-про наименьшие квадраты и как считается оптимальный график
+
 
 в прогрмме вводится шаг и число итераций. написуть тут что это и как влияет а так же оптимальные числа для нашего случая
+на примере спуска человека с горы (рисунок есть )
 
 ### Precision (bonus part):
 Объяснить как считается Mean Absolute Error: и Precision (R^2) и о чем вообще эти коээфициенты
