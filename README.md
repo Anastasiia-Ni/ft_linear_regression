@@ -16,7 +16,6 @@ Where:
 - theta_0 is the intercept (displacement coefficient).
 - theta_1 s the slope (slope factor).
 
-![Gradient Descend](https://private-user-images.githubusercontent.com/73773741/286714200-01368c23-e176-4f22-9e41-f0f86aa59605.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDEyODUxNzcsIm5iZiI6MTcwMTI4NDg3NywicGF0aCI6Ii83Mzc3Mzc0MS8yODY3MTQyMDAtMDEzNjhjMjMtZTE3Ni00ZjIyLTllNDEtZjBmODZhYTU5NjA1LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzExMjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMTI5VDE5MDc1N1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWU4OGQ5N2ZiM2RjZWQwNjIwZGVhY2VmMDk1NThiOGJjNWU0YjY1ODUxYWMxNTgxNWUzNTAxYzgwNDY0MTQwYmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.HncNexrU0ZBUCDhYCFmgzKmZ0ikqZi24ZoI_do9LNeo)
   РИСУНОК Visualizing an example of linear regression on a graph.
   The goal of regression is to find the coefficients of this linear combination, thereby determining the regression function.
 
@@ -40,6 +39,7 @@ In the graphical representation, this corresponds to finding the line that minim
 
 
 ### Gradient Descent:
+
 Gradient descent is an optimization algorithm used to find the minimum of a function iteratively. 
 In the context of machine learning, it is employed to minimize the cost function, 
 which measures the difference between the predicted values and the actual values. 
