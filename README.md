@@ -16,7 +16,11 @@ Where:
 - theta_0 is the intercept (displacement coefficient).
 - theta_1 s the slope (slope factor).
 
-  ![Visualizing an example of linear regression on a graph.](!!!!!!ссылка)
+
+  
+  <img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Graph_LR.png" width="500">
+  
+
   The goal of regression is to find the coefficients of this linear combination, thereby determining the regression function.
 
 ### Pearson Correlation Coefficient:
@@ -33,7 +37,8 @@ The closer r is to 1 or -1, the better the linear regression captures the underl
 ### Method of least squares
 The method of least squares aims to find parameters in such a way that the predicted values are as close as possible to the actual values. 
 Graphically, this is expressed as follows:
-РИСУНОК
+
+<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Least_squares.jpg" width="500">
 
 In the graphical representation, this corresponds to finding the line that minimizes the sum of the squared distances between each data point and the corresponding point on the line.
 
@@ -45,6 +50,8 @@ In the context of machine learning, it is employed to minimize the cost function
 which measures the difference between the predicted values and the actual values. 
 The algorithm adjusts the model parameters (in this case θ₀ and θ₁) 
 
+<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Gradient_desc.jpg" width="500">
+
 СЮДА НАЙТИ НОРМАЛЬНУЮ формулу с объяснением и рисунки
 
 
@@ -52,10 +59,10 @@ The algorithm adjusts the model parameters (in this case θ₀ and θ₁)
 
 - Number of Iterations: The number of iterations determines how many times the algorithm will update the parameters. Too few iterations may result in an incomplete convergence, while too many iterations could lead to overfitting. It's crucial to monitor the convergence of the cost function and select an appropriate number of iterations.
 
-на примере спуска человека с горы (рисунок есть )
 
 ### Precision (bonus part):
 Объяснить как считается Mean Absolute Error: и Precision (R^2) и о чем вообще эти коээфициенты
+<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Deviation.jpg" width="500">
 
 ## Specifications
 - Language: Python 3.6.9
@@ -92,6 +99,10 @@ Model calculation...
 Regression Line: y = -1.00x + 0.94
 -------------------------------------------
 ```
+
+<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Distribution_of_car_prices.png" width="500">
+
+
 2. Prediction:
 - Run predict.py to predict car prices based on user-input mileage.
 ```
