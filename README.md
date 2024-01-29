@@ -9,14 +9,14 @@ The training program utilizes gradient descent to find the optimal parameters fo
 Linear regression is a fundamental concept in machine learning and statistics used to model the relationship between a dependent variable and one or more independent variables. 
 In simple linear regression, there is only one independent variable, and the relationship is represented by a straight line. 
 The equation of a simple linear regression model is given by:
-`$ y = \theta_0 + \theta_1 \cdot x $`
+`y = θ₀ + θ₁ * x`.
 Where:
 - y is the dependent variable (car price in this project).
 - x is the independent variable (car mileage).
 - theta_0 is the intercept (displacement coefficient).
 - theta_1 s the slope (slope factor).
 
-  РИСУНОК Visualizing an example of linear regression on a graph.
+  ![Visualizing an example of linear regression on a graph.](!!!!!!ссылка)
   The goal of regression is to find the coefficients of this linear combination, thereby determining the regression function.
 
 ### Pearson Correlation Coefficient:
@@ -43,12 +43,15 @@ In the graphical representation, this corresponds to finding the line that minim
 Gradient descent is an optimization algorithm used to find the minimum of a function iteratively. 
 In the context of machine learning, it is employed to minimize the cost function, 
 which measures the difference between the predicted values and the actual values. 
-The algorithm adjusts the model parameters (in this case theta0 and theta1) 
+The algorithm adjusts the model parameters (in this case θ₀ and θ₁) 
 
 СЮДА НАЙТИ НОРМАЛЬНУЮ формулу с объяснением и рисунки
 
 
-в прогрмме вводится шаг и число итераций. написуть тут что это и как влияет а так же оптимальные числа для нашего случая
+- Learning Rate (α): A higher learning rate may cause the algorithm to converge faster, but if it's too high, it may overshoot the minimum. Conversely, a lower learning rate might converge more slowly but could be more stable. Experiment with different values to find an optimal balance.
+
+- Number of Iterations: The number of iterations determines how many times the algorithm will update the parameters. Too few iterations may result in an incomplete convergence, while too many iterations could lead to overfitting. It's crucial to monitor the convergence of the cost function and select an appropriate number of iterations.
+
 на примере спуска человека с горы (рисунок есть )
 
 ### Precision (bonus part):
