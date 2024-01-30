@@ -9,12 +9,14 @@ The training program utilizes gradient descent to find the optimal parameters fo
 Linear regression is a fundamental concept in machine learning and statistics used to model the relationship between a dependent variable and one or more independent variables. 
 In simple linear regression, there is only one independent variable, and the relationship is represented by a straight line. 
 The equation of a simple linear regression model is given by:
-`y = θ₀ + θ₁ * x`.
+
+![Linear Regression Equation](https://latex.codecogs.com/svg.latex?y%20=%20\theta_0%20+%20\theta_1%20\cdot%20x).
+
 Where:
-- y is the dependent variable (car price in this project).
-- x is the independent variable (car mileage).
-- theta_0 is the intercept (displacement coefficient).
-- theta_1 s the slope (slope factor).
+- ![ y ](https://latex.codecogs.com/svg.latex?y) is the dependent variable (car price in this project).
+- ![ x ](https://latex.codecogs.com/svg.latex?x) is the independent variable (car mileage).
+- ![ \theta_0 ](https://latex.codecogs.com/svg.latex?\theta_0) is the intercept (displacement coefficient).
+- ![ \theta_1 ](https://latex.codecogs.com/svg.latex?\theta_1) is the slope (slope factor).
 
 
   
@@ -67,12 +69,36 @@ The method of least squares assumes a linear relationship between the input and 
 Gradient descent is an optimization algorithm used to find the minimum of a function iteratively. 
 In the context of machine learning, it is employed to minimize the cost function, 
 which measures the difference between the predicted values and the actual values. 
-The algorithm adjusts the model parameters (in this case θ₀ and θ₁) 
+The algorithm adjusts the model parameters (in this case θ₀ and θ₁).
 
 <img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Gradient_desc.jpg" width="500">
 
-СЮДА НАЙТИ НОРМАЛЬНУЮ формулу с объяснением и рисунки
+The update rule for gradient descent in the context of linear regression is as follows:
 
+![Update Rule for Gradient Descent](https://latex.codecogs.com/svg.latex?%5Ctheta_0%20=%20%5Ctheta_0%20-%20%5Calpha%20%5Cfrac{1}{m}%20%5Csum_{i=1}^{m}%20(h_%7B%5Ctheta%7D(x%5E%7B(i)%7D)%20-%20y%5E%7B(i)%7D))
+
+
+![Update Rule for Gradient Descent](https://latex.codecogs.com/svg.latex?%5Ctheta_1%20=%20%5Ctheta_1%20-%20%5Calpha%20%5Cfrac{1}{m}%20%5Csum_{i=1}^{m}%20((h_%7B%5Ctheta%7D(x%5E%7B(i)%7D)%20-%20y%5E%7B(i)%7D)%20%5Ccdot%20x%5E%7B(i)%7D))
+
+where:
+- ![ \alpha ](https://latex.codecogs.com/svg.latex?\alpha) is the learning rate, controlling the step size in each iteration.
+- ![ m ](https://latex.codecogs.com/svg.latex?m) is the number of training examples.
+- ![ h_{\theta}(x^{(i)}) ](https://latex.codecogs.com/svg.latex?h_{\theta}(x^{(i)})) is the predicted value for the \( i \)-th example.
+- ![ y^{(i)} ](https://latex.codecogs.com/svg.latex?y^{(i)}) is the actual value for the \( i \)-th example.
+- ![ x^{(i)} ](https://latex.codecogs.com/svg.latex?x^{(i)}) is the input feature for the \( i \)-th example.
+
+This formula represents the simultaneous update of the parameters  ![ \theta_0 ](https://latex.codecogs.com/svg.latex?\theta_0)  and  ![ \theta_1 ](https://latex.codecogs.com/svg.latex?\theta_1)  in the direction that minimizes the cost function.
+
+
+Here is an simple illustration depicting the concept of gradient descent:
+
+<img src="https://miro.medium.com/v2/resize:fit:1200/format:webp/1*iNPHcCxIvcm7RwkRaMTx1g.jpeg" width="350">
+
+
+
+In this visualization, the algorithm iteratively adjusts the parameters to find the minimum of the cost function.
+
+Influence of Step Size and Iterations:
 
 - Learning Rate (α): A higher learning rate may cause the algorithm to converge faster, but if it's too high, it may overshoot the minimum. Conversely, a lower learning rate might converge more slowly but could be more stable. Experiment with different values to find an optimal balance.
 
