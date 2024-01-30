@@ -116,7 +116,7 @@ This aspect is well described in this article: [Quick Guide to Gradient Descent 
 
 Here, ![m](https://latex.codecogs.com/svg.latex?m) is the number of predictions, ![h_{\theta}(x^{(i)})](https://latex.codecogs.com/svg.latex?h_{\theta}(x^{(i)})) is the predicted value, and ![y^{(i)}](https://latex.codecogs.com/svg.latex?y^{(i)}) is the actual value.
 
-<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Deviation.jpg" width="500">
+<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Deviation.jpg" width="450">
 
 **Precision**, often represented by ![R^2](https://latex.codecogs.com/svg.latex?R^2), measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). It ranges from 0 to 1, where 1 indicates perfect predictions.
 
@@ -132,9 +132,9 @@ These metrics help assess the accuracy and performance of the model, providing i
 - Library: Matplotlib for data visualization
 - Data Format: CSV files
 - Programs:
-  - training.py: Trains the model and stores the parameters in "theta.csv"
-  - estimation.py: Estimates the price of a car based on user-input mileage using the trained model
-  - accuracy.py: Calculates the coefficient of determination for model accuracy assessment
+  - train.py: Trains the model and stores the parameters in "theta.csv"
+  - predict.py: Estimates the price of a car based on user-input mileage using the trained model
+  - precision.py: Calculates the coefficient of determination for model accuracy assessment
 
 ## Installation
 ```
@@ -176,6 +176,10 @@ Write the mileage (in km) to predict the price: 50000
 The estimated price of the car is: 7426.41
 -------------------------------------------
 ```
+
+<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Prediction.jpg " width="500">
+
+
 3. Precision (bonus part):
 - Run precision.py to calculate the coefficient of determination for model accuracy assessment.
 ```
