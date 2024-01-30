@@ -43,6 +43,25 @@ Graphically, this is expressed as follows:
 In the graphical representation, this corresponds to finding the line that minimizes the sum of the squared distances between each data point and the corresponding point on the line.
 
 
+The method minimizes the sum of the squared differences between the observed and predicted values. The equation for the line (or curve) that best fits the data is determined by minimizing the sum of the squared vertical distances (residuals) from each data point to the line.
+
+For linear regression, the objective function to minimize is often expressed as:
+
+![Math Formula](https://latex.codecogs.com/svg.latex?%5Ctext%7BMinimize%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%28Y_i%20-%20%28mx_i%20%2B%20b%29%29%5E2)
+
+where: <img src="https://latex.codecogs.com/svg.latex?Y_i" /> represents the observed values, 
+<img src="https://latex.codecogs.com/svg.latex?mx_i+b" /> represents the predicted values from the linear model, and the sum is taken over all data points. 
+
+The parameters <img src="https://latex.codecogs.com/svg.latex?m" /> and <img src="https://latex.codecogs.com/svg.latex?b" /> are adjusted to minimize this sum, providing the best-fitting line through the data.
+
+
+The method of least squares plays a crucial role in regression analysis. It is used to find the line that best represents the relationship between the independent variable (input) and the dependent variable (output). By minimizing the sum of squared differences, the method identifies the parameters that yield the most accurate predictions.
+
+
+The method of least squares assumes a linear relationship between the input and output variables. While this assumption simplifies the model, it might not capture complex relationships in the data. It's essential to consider the linearity assumption and explore more advanced models for nonlinear relationships.
+
+
+
 ### Gradient Descent:
 
 Gradient descent is an optimization algorithm used to find the minimum of a function iteratively. 
