@@ -105,6 +105,9 @@ Influence of Step Size and Iterations:
 - Number of Iterations: The number of iterations determines how many times the algorithm will update the parameters. Too few iterations may result in an incomplete convergence, while too many iterations could lead to overfitting. It's crucial to monitor the convergence of the cost function and select an appropriate number of iterations.
 
 
+This aspect is well described in this article: [Quick Guide to Gradient Descent and Its Variants](https://towardsdatascience.com/quick-guide-to-gradient-descent-and-its-variants-97a7afb33add).
+
+
 ### Precision (bonus part):
 
 **Mean Absolute Error** is a metric used to measure the average absolute differences between predicted and actual values. It is calculated as:
@@ -113,19 +116,16 @@ Influence of Step Size and Iterations:
 
 Here, ![m](https://latex.codecogs.com/svg.latex?m) is the number of predictions, ![h_{\theta}(x^{(i)})](https://latex.codecogs.com/svg.latex?h_{\theta}(x^{(i)})) is the predicted value, and ![y^{(i)}](https://latex.codecogs.com/svg.latex?y^{(i)}) is the actual value.
 
+<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Deviation.jpg" width="500">
 
-
-**Precision**, often represented by \( R^2 \), measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). It ranges from 0 to 1, where 1 indicates perfect predictions.
+**Precision**, often represented by ![R^2](https://latex.codecogs.com/svg.latex?R^2), measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). It ranges from 0 to 1, where 1 indicates perfect predictions.
 
 ![R^2](https://latex.codecogs.com/svg.latex?R^2=1-\frac{\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2}{\sum_{i=1}^{m}(y^{(i)}-\bar{y})^2})
 
-Here, \( \bar{y} \) is the mean of the actual values.
+Here, ![ \bar{y} ](https://latex.codecogs.com/svg.latex?\bar{y}) is the mean of the actual values.
 
-These metrics help assess the accuracy and performance of the model, providing insights into how well it predicts the target variable. A higher \( R^2 \) value and lower MAE indicate better model performance.
+These metrics help assess the accuracy and performance of the model, providing insights into how well it predicts the target variable. A higher ![R^2](https://latex.codecogs.com/svg.latex?R^2) value and lower MAE indicate better model performance.
 
-
-Объяснить как считается Mean Absolute Error: и Precision (R^2) и о чем вообще эти коээфициенты
-<img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Deviation.jpg" width="500">
 
 ## Specifications
 - Language: Python 3.6.9
