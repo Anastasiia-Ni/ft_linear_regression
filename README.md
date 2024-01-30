@@ -106,6 +106,24 @@ Influence of Step Size and Iterations:
 
 
 ### Precision (bonus part):
+
+**Mean Absolute Error** is a metric used to measure the average absolute differences between predicted and actual values. It is calculated as:
+
+![MAE](https://latex.codecogs.com/svg.latex?\text{MAE}=\frac{1}{m}\sum_{i=1}^{m}|h_{\theta}(x^{(i)})-y^{(i)}|)
+
+Here, ![m](https://latex.codecogs.com/svg.latex?m) is the number of predictions, ![h_{\theta}(x^{(i)})](https://latex.codecogs.com/svg.latex?h_{\theta}(x^{(i)})) is the predicted value, and ![y^{(i)}](https://latex.codecogs.com/svg.latex?y^{(i)}) is the actual value.
+
+
+
+**Precision**, often represented by \( R^2 \), measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). It ranges from 0 to 1, where 1 indicates perfect predictions.
+
+![R^2](https://latex.codecogs.com/svg.latex?R^2=1-\frac{\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2}{\sum_{i=1}^{m}(y^{(i)}-\bar{y})^2})
+
+Here, \( \bar{y} \) is the mean of the actual values.
+
+These metrics help assess the accuracy and performance of the model, providing insights into how well it predicts the target variable. A higher \( R^2 \) value and lower MAE indicate better model performance.
+
+
 Объяснить как считается Mean Absolute Error: и Precision (R^2) и о чем вообще эти коээфициенты
 <img src="https://github.com/Anastasiia-Ni/ft_linear_regression/blob/main/assets/Deviation.jpg" width="500">
 
